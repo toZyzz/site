@@ -418,7 +418,7 @@ html {
     background-color: red;
 }
 .picture_navigate img{
-	border:0px solid black;
+	border:2px solid black;
 	display: block;
 	box-sizing: border-box;
 }
@@ -434,7 +434,6 @@ html {
 	height: 420px;
 	overflow: hidden;
 	position: relative;
-	background-color: blue;
 }
 .pictures_slider ul{
 	margin: 0px;
@@ -444,4 +443,8 @@ html {
 .pictures_slider li{
 	display: block;
 	margin-bottom: 10px;
+}
+
+.picture_navigate .end, .picture_navigate .up{
+	background-color: black;
 }

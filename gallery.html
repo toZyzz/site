@@ -70,11 +70,11 @@
             </nav>
             <div class="picture_window">
                 <div class="picture_navigate">
-                    <a id="picture_up" href="#"></a>
+                    <a id="picture_up" class="up" href="#"></a>
                     <div id="slid" class="pictures_slider">
                         <ul>
-                            <li>
-                                 <img class="first_image geg" width="100%" src="img/1.jpg">
+                            <li class="first_image">
+                                 <img class="metka" width="100%" src="img/1.jpg">
                             </li>
                             <li>
                                  <img width="100%" src="img/2.jpg">
@@ -135,15 +135,43 @@ function GG(){
     var slider_height = document.getElementById("slid");
     var picture_down = document.getElementById("picture_down");
     var pictures_slider = document.getElementById("pictures_slider");
-    var firt_img = $(".geg");
+    var height_ul=$("#slid ul").height();
+    var border_width=parseFloat($("#slid img").css("border-width"));
     $("#picture_down").click(function(event){
         event.preventDefault();
-        var height=$(".first_image").height();
-        top=top-height;
-        console.log(top, height);
+        if (-top>=(height_ul-420/*нет адаптации 420*/)) {
+           
+        }else{
+        var height=$(".metka").height()+10/*нет адаптации 10*/; 
+        $('.up').removeClass('up'); 
+        top=top-height-2*border_width;
+        console.log(height);
        $("#slid>ul").css("margin-top",top+'px');
-       firt_img.toggleClass("first_image");
-       
+       $(".first_image").next().addClass("first_image");
+       $(".metka").parent().removeClass("first_image");
+       $(".first_image").prev().children().removeClass("metka");
+       $(".first_image img").addClass("metka");
+       if(-top>=(height_ul-420)){
+          $("#picture_down").addClass('end');
+       }
+       }
+    });
+    $("#picture_up").click(function(event){
+        event.preventDefault();
+        if (top<0) {
+        $(".end").removeClass('end');
+        var height=$(".first_image").prev().children().height()+10/*нет адаптации 10*/;
+        top=top+height+2*border_width;
+        $("#slid>ul").css("margin-top",top+'px');
+        $(".first_image").prev().addClass("first_image");
+        $(".metka").parent().removeClass("first_image");
+        $(".first_image").next().children().removeClass("metka");
+        $(".first_image img").addClass("metka");
+        if (top==0) {;
+        $("#picture_up").addClass('up');}
+    }else{
+        $("#picture_up").addClass('up');
+        }
     });
 }
 $(GG());
