@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/indexcss.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<title>yurgin.com</title>
+	<style>
+        @font-face {
+        font-family: Handbook; /* Гарнитура шрифта */
+        src: url(fonts/10446.ttf); /* Путь к файлу со шрифтом */
+    }
+	</style>
+</head>
+<body id='dod' class ="index" style="background-image: url(img/картина1.jpg); ">
+    <div class="container clearfix">
+        <header class="head clearfix">
+    	    <h1 class="index_head">Александр Юргин</h1>
+    	    <div class="paginator">
+                <a id='picture_0' class='pushed' href="#1">Первый слайд</a>
+       	        <a id='picture_1' href="#2">Второй слайд</a>
+      	        <a id='picture_2' href="#3">Третий слайд</a>
+       	        <a id='picture_3' href="#">Четвёртый слайд</a>
+       	        <a id='picture_4' href="#">Пятый слайд</a>
+       	    </div>
+        </header>
+    </div>
+    <main class="index_main">
+        <div class="container clearfix">
+    	    <nav class="main_navigation">
+    		    <ul>
+        	        <li>
+        	            <a class="navigate_link1" href="gallery.html">Галерея</a>
+        	        </li>
+        	        <li>
+        	            <a class="navigate_link" href="aboutArtist.html">О художнике</a>
+        	        </li>
+        	        <li>
+        	            <a class="navigate_link" href="contacts.html">Контакты</a>
+        	        </li>
+        	    </ul>
+    	    </nav>
+    	</div>
+    </main>
+    <footer class="all_footer clearfix">
+    		<div class="footer_contacts">
+    		    <a href="#">Сообщение</a>
+    			<a href="#">Фейсбук</a>
+    		    <a href="#">Телефон</a>
+    		</div>
+    </footer>
+</body>
+</html>
+
+<script type="text/javascript">
+    function animateSlide(){
+        var amount =5;
+        var arr=[];
+        for (var i = 0; i < amount; i++) {
+            var str='picture_'+i
+            arr[i] = document.getElementById(str);
+            console.log (arr[i])
+        };
+        $("#picture_0").click(function(event){
+            event.preventDefault();
+            document.body.style.backgroundImage='url(img/картина1.jpg)';
+            console.log('gg');
+            $('.paginator a').removeClass('pushed');
+            $(this).addClass('pushed');
+        });
+        $("#picture_1").click(function(event){
+            event.preventDefault();
+            document.body.style.backgroundImage='url(img/картина2.jpg)';
+            console.log('gg');
+            $('.paginator a').removeClass('pushed');
+            $(this).addClass('pushed');
+        });
+        $("#picture_2").click(function(event){
+            event.preventDefault();
+            document.body.style.backgroundImage='url(img/картина3.jpg)';
+            console.log('gg');
+            $('.paginator a').removeClass('pushed');
+            $(this).addClass('pushed');
+        });
+        $("#picture_3").click(function(event){
+            event.preventDefault();
+            document.body.style.backgroundImage='url(img/картина4.jpg)';
+            console.log('gg');
+            $('.paginator a').removeClass('pushed');
+            $(this).addClass('pushed');
+        });
+        $("#picture_4").click(function(event){
+            event.preventDefault();
+            document.body.style.backgroundImage='url(img/картина5.jpg)';
+            console.log('gg');
+            $('.paginator a').removeClass('pushed');
+            $(this).addClass('pushed');
+        });
+       
+    }
+    $(animateSlide());
+</script>

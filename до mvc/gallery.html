@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/indexcss.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <title>О художнике</title>
+    <style>
+        @font-face {
+        font-family: Handbook; /* Гарнитура шрифта */
+        src: url(fonts/10446.ttf); /* Путь к файлу со шрифтом */
+    }
+    </style>
+</head>
+<body class ="gallery">
+    <div class="container clearfix">
+        <header class="head_artist">
+            <h1 class="index_head">Александр Юргин</h1>
+            <nav class="main_navigation ">
+                <ul>
+                    <li>
+                        <a class="navigate_link1" href="index.html">На главную</a>
+                    </li>
+                    <li>
+                        <a class="navigate_link" href="#">Галерея</a>
+                    </li>
+                    <li>
+                        <a class="navigate_link" href="aboutArtist.html">О художнике</a>
+                    </li>
+                    <li>
+                        <a class="navigate_link" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <main class="index_main">
+        <div class="container clearfix">
+            <nav class="gallery_navigation">
+                <ul class="list">
+                    <li>
+                        <a id='_1' class="navigate_link" href="#">Пейзаж</a>
+                        <ul class="under_list">
+                            <li>
+                                <a class="navigate_link" href="#">Зима</a>
+                            </li>
+                            <li>
+                                <a class="navigate_link" href="#">Весна</a>
+                            </li>
+                            <li>
+                                <a class="navigate_link" href="#">Лето</a>
+                            </li>
+                            <li>
+                                <a class="navigate_link" href="#">Осень</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a id='_2' class="navigate_link" href="#">Натюрморт</a>
+                        <ul class="under_list">
+                            <li>
+                                <a class="navigate_link" href="#">Предметы</a>
+                            </li>
+                            <li>
+                                <a class="navigate_link" href="#">Живность</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a id='_3' class="navigate_link" href="#">Портрет</a>
+                    </li>
+                    <li>
+                        <a id='_4' class="navigate_link" href="#">Разное</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="picture_window">
+                <div class="picture_navigate">
+                    <a id="picture_up" class="up" href="#"></a>
+                    <div id="slid" class="pictures_slider">
+                        <ul>
+                            <li class="first_image">
+                                 <img class="metka" width="100%" src="img/1.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/2.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/3.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/4.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/5.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/6.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/7.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/8.jpg">
+                            </li>
+                            <li>
+                                 <img width="100%" src="img/9.jpg">
+                            </li>
+                        </ul>
+                    </div>
+                    <a id="picture_down" href="#"></a>
+                </div>
+                <div class="watch_block">
+                    <div class="picture_image"><img width="100%" src="img/кар1.jpg"></div>
+                    <div class="description">
+                        <p class="name"><span class="bold">Название: </span>Деревенская дорога</p>
+                        <p class="year"><span class="bold">Год: </span>2010</p>
+                        <p class="size"><span class="bold">Размер: </span> 50x60</p>
+                    </div>
+                    <div class="gallery_paginator">
+                        <a class="paginator_left" href="#" >Влево</a>
+                        <a class="paginator_right" href="#" >Вправо</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="all_footer clearfix">
+            <div class="footer_contacts">
+                <a href="#">Сообщение</a>
+                <a href="#">Фейсбук</a>
+                <a href="#">Телефон</a>
+            </div>
+    </footer>
+</body>
+</html>
+<script type="text/javascript">
+function GG(){
+ var top=0;
+    var picture_up = document.getElementById(".picture_up");
+    var slider_height = document.getElementById("slid");
+    var picture_down = document.getElementById("picture_down");
+    var pictures_slider = document.getElementById("pictures_slider");
+    var click=true;
+    var height_ul=$("#slid ul").height();
+    var border_width=parseFloat($("#slid img").css("border-width"));
+    $("#picture_down").click(function(event){
+        if(click==true){
+            event.preventDefault();
+            click=false;
+            if (-top>=(height_ul-420)) {
+                $("#picture_down").addClass('end');
+                click=true;
+            }else{
+                var height=$(".metka").height()+10/*нет адаптации 10*/; 
+                $('.up').removeClass('up'); 
+                var stopped=top;
+                var timer=setInterval(recss,1)
+                function recss(){
+                    if(top<=(stopped-height-2*border_width)){
+                        clearInterval(timer);
+                        click=true;
+                        $(".first_image").next().addClass("first_image");
+                        $(".metka").parent().removeClass("first_image");
+                        $(".first_image").prev().children().removeClass("metka");
+                        $(".first_image img").addClass("metka");
+                        if (-top>=(height_ul-420)) {
+                            $("#picture_down").addClass('end');
+                            click=true;
+                         }
+                    }else{
+                        top-=1;
+                        console.log(top);
+                        $("#slid>ul").css("margin-top",top+'px');
+                    }
+                }
+            }
+        }else{
+            event.preventDefault();
+             console.log(click);
+        }
+    });
+    $("#picture_up").click(function(event){
+        if(click==true){ ///бред
+            event.preventDefault();
+            click=false;
+            if (top<0) {
+                $(".end").removeClass('end');
+                var height=$(".first_image").prev().children().height()+10/*нет адаптации 10*/;
+                var stopped=top;
+                var timer=setInterval(recss,1)
+                function recss(){
+                    if(top>=(stopped+height+2*border_width)){
+                        clearInterval(timer);
+                        click=true;
+                        $("#slid>ul").css("margin-top",top+'px');
+                        $(".first_image").prev().addClass("first_image");
+                        $(".metka").parent().removeClass("first_image");
+                        $(".first_image").next().children().removeClass("metka");
+                        $(".first_image img").addClass("metka");
+                        if (top==0) {
+                            $("#picture_up").addClass('up');
+                            click=true;
+                        }
+                    }else{
+                        top+=1;
+                        $("#slid>ul").css("margin-top",top+'px');
+                    }
+                }
+            }
+            else{
+                $("#picture_up").addClass('up');
+                click=true;
+            }
+        }else{
+            event.preventDefault();
+            console.log(click);
+        }
+    });
+   
+    $('.list').on('click', function(event) {
+        event.preventDefault();
+        var id_click =   event.target.id;
+        $('#'+id_click).next().toggleClass('show');
+    });
+}
+
+$(GG());
+</script>

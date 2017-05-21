@@ -41,7 +41,7 @@
             <nav class="gallery_navigation">
                 <ul class="list">
                     <li>
-                        <a class="navigate_link" href="#">Пейзаж</a>
+                        <a id='_1' class="navigate_link" href="#">Пейзаж</a>
                         <ul class="under_list">
                             <li>
                                 <a class="navigate_link" href="#">Зима</a>
@@ -58,13 +58,21 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="navigate_link" href="#">Натюрморт</a>
+                        <a id='_2' class="navigate_link" href="#">Натюрморт</a>
+                        <ul class="under_list">
+                            <li>
+                                <a class="navigate_link" href="#">Предметы</a>
+                            </li>
+                            <li>
+                                <a class="navigate_link" href="#">Живность</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a class="navigate_link" href="#">Портрет</a>
+                        <a id='_3' class="navigate_link" href="#">Портрет</a>
                     </li>
                     <li>
-                        <a class="navigate_link" href="#">Разное</a>
+                        <a id='_4' class="navigate_link" href="#">Разное</a>
                     </li>
                 </ul>
             </nav>
@@ -130,49 +138,94 @@
 </html>
 <script type="text/javascript">
 function GG(){
-    var top=0;
+ var top=0;
     var picture_up = document.getElementById(".picture_up");
     var slider_height = document.getElementById("slid");
     var picture_down = document.getElementById("picture_down");
     var pictures_slider = document.getElementById("pictures_slider");
+    var click=true;
     var height_ul=$("#slid ul").height();
     var border_width=parseFloat($("#slid img").css("border-width"));
     $("#picture_down").click(function(event){
-        event.preventDefault();
-        if (-top>=(height_ul-420/*нет адаптации 420*/)) {
-           
+        if(click==true){
+            event.preventDefault();
+            click=false;
+            if (-top>=(height_ul-420)) {
+                $("#picture_down").addClass('end');
+                click=true;
+            }else{
+                var height=$(".metka").height()+10/*нет адаптации 10*/; 
+                $('.up').removeClass('up'); 
+                var stopped=top;
+                var timer=setInterval(recss,1)
+                function recss(){
+                    if(top<=(stopped-height-2*border_width)){
+                        clearInterval(timer);
+                        click=true;
+                        $(".first_image").next().addClass("first_image");
+                        $(".metka").parent().removeClass("first_image");
+                        $(".first_image").prev().children().removeClass("metka");
+                        $(".first_image img").addClass("metka");
+                        if (-top>=(height_ul-420)) {
+                            $("#picture_down").addClass('end');
+                            click=true;
+                         }
+                    }else{
+                        top-=1;
+                        console.log(top);
+                        $("#slid>ul").css("margin-top",top+'px');
+                    }
+                }
+            }
         }else{
-        var height=$(".metka").height()+10/*нет адаптации 10*/; 
-        $('.up').removeClass('up'); 
-        top=top-height-2*border_width;
-        console.log(height);
-       $("#slid>ul").css("margin-top",top+'px');
-       $(".first_image").next().addClass("first_image");
-       $(".metka").parent().removeClass("first_image");
-       $(".first_image").prev().children().removeClass("metka");
-       $(".first_image img").addClass("metka");
-       if(-top>=(height_ul-420)){
-          $("#picture_down").addClass('end');
-       }
-       }
-    });
-    $("#picture_up").click(function(event){
-        event.preventDefault();
-        if (top<0) {
-        $(".end").removeClass('end');
-        var height=$(".first_image").prev().children().height()+10/*нет адаптации 10*/;
-        top=top+height+2*border_width;
-        $("#slid>ul").css("margin-top",top+'px');
-        $(".first_image").prev().addClass("first_image");
-        $(".metka").parent().removeClass("first_image");
-        $(".first_image").next().children().removeClass("metka");
-        $(".first_image img").addClass("metka");
-        if (top==0) {;
-        $("#picture_up").addClass('up');}
-    }else{
-        $("#picture_up").addClass('up');
+            event.preventDefault();
+             console.log(click);
         }
     });
+    $("#picture_up").click(function(event){
+        if(click==true){ ///бред
+            event.preventDefault();
+            click=false;
+            if (top<0) {
+                $(".end").removeClass('end');
+                var height=$(".first_image").prev().children().height()+10/*нет адаптации 10*/;
+                var stopped=top;
+                var timer=setInterval(recss,1)
+                function recss(){
+                    if(top>=(stopped+height+2*border_width)){
+                        clearInterval(timer);
+                        click=true;
+                        $("#slid>ul").css("margin-top",top+'px');
+                        $(".first_image").prev().addClass("first_image");
+                        $(".metka").parent().removeClass("first_image");
+                        $(".first_image").next().children().removeClass("metka");
+                        $(".first_image img").addClass("metka");
+                        if (top==0) {
+                            $("#picture_up").addClass('up');
+                            click=true;
+                        }
+                    }else{
+                        top+=1;
+                        $("#slid>ul").css("margin-top",top+'px');
+                    }
+                }
+            }
+            else{
+                $("#picture_up").addClass('up');
+                click=true;
+            }
+        }else{
+            event.preventDefault();
+            console.log(click);
+        }
+    });
+   
+    $('.list').on('click', function(event) {
+        event.preventDefault();
+        var id_click =   event.target.id;
+        $('#'+id_click).next().toggleClass('show');
+    });
 }
+
 $(GG());
 </script>

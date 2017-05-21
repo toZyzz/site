@@ -1,0 +1,40 @@
+CREATE TABLE categories(
+    id int AUTO_INCREMENT,
+    name char(20) not null,
+    CONSTRAINT PK_name_of_category PRIMARY KEY NONCLUSTERED (id)  
+);
+insert into categories(name) values('пейзаж');
+insert into categories(name) values('натюрмОрт');
+insert into categories(name) values('разное');
+
+CREATE TABLE childrens_for_category(
+    id int AUTO_INCREMENT,
+    id_parents int NOT NULL,
+    name char(20) NOT NULL,
+    CONSTRAINT PK_id_children PRIMARY KEY NONCLUSTERED (id),
+    CONSTRAINT FK_id_к_отделу FOREIGN KEY (id_parents) REFERENCES categories (id)
+);
+insert into childrens_for_category(id_parents, name) values('1','Лето');
+insert into childrens_for_category(id_parents, name) values('1','оСень');
+insert into childrens_for_category(id_parents, name) values('1','ЗимА');
+insert into childrens_for_category(id_parents, name) values('1','Весна');
+
+CREATE TABLE pictures(
+    id int AUTO_INCREMENT,
+    id_child_category int,
+    id_category int,
+    name char(100) NOT NULL,
+    size_y int NOT NULL,
+    size_x int NOT NULL,
+    year_of_paint char(4) NOT NULL,
+    price int NOT NUll,
+    link char(200) NOT NULL,
+    CONSTRAINT PK_id_image PRIMARY KEY NONCLUSTERED (id),
+    CONSTRAINT FK_id_cat FOREIGN KEY (id_category) REFERENCES categories (id),
+    CONSTRAINT FK_id_child_cat FOREIGN KEY (id_child_category) REFERENCES childrens_for_category (id)
+);
+insert into pictures(id_child_category, id_category, name, size_y, size_x, year_of_paint, price, link) values('1',NULL,'Деревня','50','40','2015','3500','1.jpg');
+insert into pictures(id_child_category, id_category, name, size_y, size_x, year_of_paint, price, link) values('1',NULL,'Деревня2','55','40','2015','3500','2.jpg');
+insert into pictures(id_child_category, id_category, name, size_y, size_x, year_of_paint, price, link) values('2',NULL,'Деревня3','55','40','2015','3500','6.jpg');
+insert into pictures(id_child_category, id_category, name, size_y, size_x, year_of_paint, price, link) values(NULL,'2','Деревня3','55','40','2015','3500','10.jpg');
+insert into pictures(id_child_category, id_category, name, size_y, size_x, year_of_paint, price, link) values(NULL,'3','Деревня3','55','40','2015','3500','12.jpg');
